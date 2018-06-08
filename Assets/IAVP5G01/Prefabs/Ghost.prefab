@@ -470,10 +470,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10a334149a3b23946936e0ab1c149139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedIndividual: 2
-  SpeedGroup: 1
-  RotationSpeed: 4
-  NeighbourDistance: 3
+  speedIndividual: 3
+  speedGroup: 1.5
+  rotationSpeed: 3
+  neighbourDistance: 4
+  dumbTime: 0.1
 --- !u!135 &135829795851844672
 SphereCollider:
   m_ObjectHideFlags: 1
