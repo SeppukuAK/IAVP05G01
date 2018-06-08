@@ -2,11 +2,15 @@
 
 public class GlobalFlock : MonoBehaviour
 {
-    public static int SceneSize = 20;
-    public static int SceneSizeX = 18;
-    public static int SceneTopY = 15;
-    public static int SceneBotY = -3;
-    public static int SceneSizeZ = 30;
+    //Dimensiones del escenario
+
+    //TODO: TOCAR ESTA MIERDA
+    [SerializeField] private int width;
+    [SerializeField] private int depth;
+    [SerializeField] private int height;
+    //[SerializeField] private int sceneTopY = 15;
+    //[SerializeField] private int sceneBotY = -3;
+    [SerializeField] private Vector3 offset;
 
     /// <summary>
     /// Prefab del Fantasma para crealos en el grupo
@@ -33,7 +37,7 @@ public class GlobalFlock : MonoBehaviour
     {
         for (int i = 0; i < numFish; i++)
         {
-            Vector3 pos = new Vector3(Random.Range(-SceneSizeX, SceneSizeX), Random.Range(SceneBotY, SceneTopY), Random.Range(-SceneSizeZ, SceneSizeZ));
+            Vector3 pos = offset + new Vector3(Random.Range(-width, width), Random.Range(-height, height), Random.Range(-depth, depth));
             AllGhosts[i] = Instantiate(GhostPrefab, pos, Quaternion.identity);
         }
     }
@@ -41,9 +45,9 @@ public class GlobalFlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Random.Range(0,10000) < 50)
+        if (Random.Range(0,200) < 1)
         {
-            GoalPos = new Vector3(Random.Range(-SceneSizeX, SceneSizeX), Random.Range(SceneBotY, SceneTopY), Random.Range(-SceneSizeZ, SceneSizeZ));
+            GoalPos = offset + new Vector3(Random.Range(-width, width), Random.Range(-height, height), Random.Range(-depth, depth));
         }
     }
 }

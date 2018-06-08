@@ -5,7 +5,8 @@ public class Flock : MonoBehaviour
     /// <summary>
     /// Velocidad a la que se mueve el fantasma
     /// </summary>
-    public float Speed;
+    public float SpeedIndividual;
+    public float SpeedGroup;
 
     /// <summary>
     /// Velocidad a la que rota el fantasma
@@ -29,32 +30,34 @@ public class Flock : MonoBehaviour
     ///// </summary>
     //Vector3 averagePosition;
 
+    private float speed;
+    private int groupSize;
+
     void Start()
     {
-        Speed = Random.Range(0.5f, 1.0f);
+        speed = SpeedIndividual;
+        groupSize = 0;
     }
 
     void Update()
     {
-        //Actualizamos si ha salido de la escena
-        bool turning = Vector3.Distance(transform.position, Vector3.zero) >= GlobalFlock.SceneSize;
+        if (Random.Range(0, 5) < 1)
+            ApplyRules();
 
-        //Si está volviendo
-        if (turning)
+        if (groupSize == 0)
         {
-            Vector3 direction = Vector3.zero - transform.position;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), RotationSpeed * Time.deltaTime);
+            speed = SpeedIndividual;
 
-            Speed = Random.Range(0.5f, 1);
-        }
-        else
-        {
-            if (Random.Range(0, 5) < 1)
-                ApplyRules();
+            //Obtenemos la dirección del grupo y giramos al pez gradualmente
+            Vector3 direction = GlobalFlock.GoalPos;
+
+            //Si la dirección es distinta a la actual, rotamos gradualmente
+            if (direction != Vector3.zero)
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), RotationSpeed * Time.deltaTime);
         }
 
         //Mueve el pez hacia delante
-        transform.Translate(0, 0, Time.deltaTime * Speed);
+        transform.Translate(0, 0, Time.deltaTime * speed);
     }
 
     /// <summary>
@@ -68,13 +71,11 @@ public class Flock : MonoBehaviour
         Vector3 center = Vector3.zero;  //Centro del grupo
         Vector3 avoid = Vector3.zero;   //Vector para evitar colisionar a otros fantasmas
 
-        float groupSpeed = 0.1f;    //Velocidad del grupo
-
         Vector3 goalPos = GlobalFlock.GoalPos; //Posición a la que se dirigen
 
         float distance; //Aux
 
-        int groupSize = 0; //Cuantos fantasmas están juntos a este
+        groupSize = 0; //Cuantos fantasmas están juntos a este
 
         foreach (GameObject ghost in allGhosts)
         {
@@ -94,31 +95,25 @@ public class Flock : MonoBehaviour
                     if (distance < 1.0f)
                         avoid += (transform.position - ghost.transform.position);
 
-                    //Calculamos la velocidad del grupo
-                    groupSpeed += ghost.GetComponent<Flock>().Speed;
-
                     //Aumentamos el número de fantasmas en el grupo
                     groupSize++;
                 }
             }
+        }
 
-            //Si el fantasma está en un grupo
-            if (groupSize > 0)
-            {
-                //Obtenemos el centro total del grupo y la velocidad total del grupo
-                center = center / groupSize + (goalPos - transform.position);
-                Speed = 3.0f;
+        //Si el fantasma está en un grupo
+        if (groupSize > 0)
+        {
+            //Obtenemos el centro total del grupo y la velocidad total del grupo
+            center = center / groupSize + (goalPos - transform.position);
+            speed = SpeedGroup;
 
-                //Obtenemos la dirección del grupo y giramos al pez gradualmente
-                Vector3 direction = (center + avoid) - transform.position;
+            //Obtenemos la dirección del grupo y giramos al pez gradualmente
+            Vector3 direction = (center + avoid) - transform.position;
 
-                //Si la dirección es distinta a la actual, rotamos gradualmente
-                if (direction != Vector3.zero)
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), RotationSpeed * Time.deltaTime);
-            }
-
-            Debug.Log(Speed);
-
+            //Si la dirección es distinta a la actual, rotamos gradualmente
+            if (direction != Vector3.zero)
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), RotationSpeed * Time.deltaTime);
         }
     }
 }
