@@ -26579,7 +26579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4167768c9eae8784c8b176a7838f5806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GhostPrefab: {fileID: 1888400602954116, guid: eec4a8b1461a85f4fa22bf70246c8c5b,
+  GhostPrefab: {fileID: 1057139806069772, guid: b235d27018874a248826b1750e1938e0,
     type: 2}
 --- !u!4 &877294915
 Transform:
