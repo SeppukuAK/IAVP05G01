@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 114982322349991580}
   m_Layer: 0
   m_Name: StoneMonster
-  m_TagString: Untagged
+  m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -176,7 +176,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1967048998262050}
   m_LocalRotation: {x: 0.70624334, y: -0.03493462, z: -0.70624334, w: 0.034934614}
-  m_LocalPosition: {x: 0.0000000080335045, y: 0.3987669, z: -0.18378516}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4307410488452110}
@@ -286,7 +286,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1888400602954116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.99, y: 4.29, z: 0}
+  m_LocalPosition: {x: 5.99, y: 6.873, z: 4.212}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4172594420831316}
@@ -388,7 +388,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 0.5
   RotationSpeed: 4
-  NeighbourDistance: 4
+  NeighbourDistance: 3
 --- !u!135 &135477984343971438
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -400,7 +400,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 0.12, z: 0.18}
 --- !u!136 &136606606517348116
 CapsuleCollider:
   m_ObjectHideFlags: 1

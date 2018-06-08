@@ -2,7 +2,6 @@
 
 public class Flock : MonoBehaviour
 {
-
     /// <summary>
     /// Velocidad a la que se mueve el fantasma
     /// </summary>
@@ -108,7 +107,7 @@ public class Flock : MonoBehaviour
             {
                 //Obtenemos el centro total del grupo y la velocidad total del grupo
                 center = center / groupSize + (goalPos - transform.position);
-                Speed = groupSpeed / groupSize;
+                Speed = 3.0f;
 
                 //Obtenemos la dirección del grupo y giramos al pez gradualmente
                 Vector3 direction = (center + avoid) - transform.position;
@@ -117,6 +116,8 @@ public class Flock : MonoBehaviour
                 if (direction != Vector3.zero)
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), RotationSpeed * Time.deltaTime);
             }
+
+            Debug.Log(Speed);
 
         }
     }

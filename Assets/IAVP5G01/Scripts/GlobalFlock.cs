@@ -43,7 +43,7 @@ public class GlobalFlock : MonoBehaviour
     {
         if (Random.Range(0,10000) < 50)
         {
-            GoalPos = new Vector3(Random.Range(-SceneSizeX, SceneSizeX), Random.Range(SceneBotY, SceneTopY), Random.Range(SceneSizeZ, SceneSizeZ));
+            GoalPos = new Vector3(Random.Range(-SceneSizeX, SceneSizeX), Random.Range(SceneBotY, SceneTopY), Random.Range(-SceneSizeZ, SceneSizeZ));
         }
     }
 }
