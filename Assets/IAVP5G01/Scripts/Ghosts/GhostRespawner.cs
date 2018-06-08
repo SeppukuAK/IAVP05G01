@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-
-
 using Opsive.ThirdPersonController;
 
 /// <summary>
@@ -27,6 +25,7 @@ public class GhostRespawner : Respawner
 
         transform.SetPositionAndRotation(position, rotation);
         m_GameObject.SetActive(true);
+        GetComponent<Flock>().StartApplyRules();
 
         EventHandler.ExecuteEvent(m_GameObject, "OnRespawn");
     }

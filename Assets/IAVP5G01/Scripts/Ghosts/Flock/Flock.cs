@@ -40,9 +40,21 @@ public class Flock : MonoBehaviour
     {
         speed = speedIndividual;
         groupSize = 0;
-        StartCoroutine(ApplyRules());
-        
+        StartApplyRules();
     }
+
+    public void StartApplyRules()
+    {
+        StartCoroutine(ApplyRules());
+    }
+
+    public void StopMovement()
+    {
+        StopAllCoroutines();
+
+        speed = 0;
+    }
+
 
     void Update()
     {

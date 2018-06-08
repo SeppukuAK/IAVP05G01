@@ -7,6 +7,10 @@ using Opsive.ThirdPersonController;
 /// </summary>
 public class DamageByContact : MonoBehaviour
 {
+    //Animaciones
+    private const string ATTACK = "Anim_Attack";
+    private const string RUN = "Anim_Run";
+
     [Tooltip("The amount of damage to deal")]
     [SerializeField]
     protected float damageAmount;
@@ -17,6 +21,7 @@ public class DamageByContact : MonoBehaviour
 
     //Referencias a componentes
     private AudioSource audioSource;
+    private Animation anim;
 
     /// <summary>
     /// Coge referencias a componentes e inicializa valores por defecto
@@ -28,6 +33,8 @@ public class DamageByContact : MonoBehaviour
             audioSource = GetComponent<AudioSource>();
             audioSource.playOnAwake = false;
         }
+        anim = GetComponent<Animation>();
+
     }
 
     /// <summary>
@@ -35,6 +42,9 @@ public class DamageByContact : MonoBehaviour
     /// </summary>
     public virtual void OnTriggerEnter(Collider other)
     {
+        //Animación de atacar
+        anim.CrossFade(ATTACK);
+
         Health health;
 
         if ((health = Utility.GetComponentForType<Health>(other.gameObject)) != null)
@@ -44,10 +54,21 @@ public class DamageByContact : MonoBehaviour
             {
                 audioSource.clip = damageSound;
                 audioSource.Play();
+
             }
 
             //Hacemos daño al personaje
             health.Damage(damageAmount, transform.position, Vector3.zero);
         }
     }
+
+    /// <summary>
+    /// Activa la animación de correr
+    /// </summary>
+    public virtual void OnTriggerExit(Collider other)
+    {
+        //Animación de correr
+        anim.CrossFade(RUN);
+    }
+
 }
