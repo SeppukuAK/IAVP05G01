@@ -58,8 +58,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4895313341335698}
-  - component: {fileID: 135829795851844672}
   - component: {fileID: 82622910222053354}
+  - component: {fileID: 136159708703865436}
   m_Layer: 21
   m_Name: Collider
   m_TagString: Untagged
@@ -621,7 +621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edbdce3b219cabc479bf6a541a5954fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RespawnTime: 3
+  m_RespawnTime: 3.5
 --- !u!114 &114882875440470026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -638,8 +638,8 @@ MonoBehaviour:
   rotationSpeed: 3
   neighbourDistance: 4
   dumbTime: 0.1
---- !u!135 &135829795851844672
-SphereCollider:
+--- !u!136 &136159708703865436
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -647,9 +647,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0.72, z: -0.02}
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136453107048065602
 CapsuleCollider:
   m_ObjectHideFlags: 1
